@@ -38,8 +38,14 @@ app.post('/api/students', (req, res) => {
 });
 
 app.get('/api/students', (req,res) => {
-    
-})
+    db.query('select * from students', (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            return res.send({ Students: result, message: 'Students list.'});
+        }
+    });
+});
 
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`);
