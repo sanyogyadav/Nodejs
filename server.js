@@ -86,6 +86,18 @@ app.delete('/api/students/:id', (req, res) => {
     });
 });
 
+app.delete('/api/students', (req, res) => {
+    const query = 'delete from students';
+    db.query(query, (err, result) => {
+        if (err) {
+            console.error('Error deleting student:', err);
+            res.status(500).send({ message: 'Error deleting student'} );
+        } else {
+            res.status(200).send({ message: 'student deleted successfully' });
+        }
+    });
+});
+
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`);
 })
