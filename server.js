@@ -47,6 +47,18 @@ app.get('/api/students', (req,res) => {
     });
 });
 
+app.get('/api/students/:id', (req, res) => {
+    let student_id = req.params.id;
+
+    db.query('select * from students where _id=?', student_id, (err, result) => {
+        if(result==0) {
+            return res.send({Message : 'Cannot find student with provided ID.'});
+        }else {
+            return res.send({Student: result, message: 'Student with ID.'});
+        }
+    });
+});
+
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`);
 })
