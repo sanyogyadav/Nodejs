@@ -59,6 +59,20 @@ app.get('/api/students/:id', (req, res) => {
     });
 });
 
+app.put('/api/students/:id', (req, res) => {
+    const student_id = req.params.id;
+    const {name, email, age, city} = req.body;
+    const query = 'update students set name=?, email=?, age=?, city=? where _id=?';
+    db.query(query, [name, email, age, city, student_id], (err, result) => {
+        if (err) {
+            console.error('Error updating student:', err);
+            res.status(500).send({ message: 'Error updating student' });
+        } else {
+            res.status(200).send('student updated successfully');
+        }
+    }); 
+});
+
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`);
 })
