@@ -22,6 +22,25 @@ db.connect( err => {
     }
 })
 
+app.post('/api/students', (req, res) => {
+    const {_id, name, email, age, city} = req.body;
+    const query = 'insert into students (_id, name, email, age, city) values(?, ?, ?, ?, ?)';
+
+    db.query(query, [_id, name, email, age, city], (err, result) => {
+        if(err) {
+            console.error('Error creating student:', err);
+            res.status(500).send('Error creating item');
+        }else {
+            // console.log(result); will show affected rows and other data in console.
+            res.status(201).send('Student created successfully');
+        }
+    });
+});
+
+app.get('/api/students', (req,res) => {
+    
+})
+
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`);
 })
