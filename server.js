@@ -37,7 +37,7 @@ app.post('/api/students', (req, res) => {
     });
 });
 
-app.get('/api/students', (req,res) => {
+app.get('/api/students/all', (req,res) => {
     db.query('select * from students', (err, result) => {
         if(err) {
             console.log(err);
@@ -94,6 +94,25 @@ app.delete('/api/students', (req, res) => {
             res.status(500).send({ message: 'Error deleting student'} );
         } else {
             res.status(200).send({ message: 'student deleted successfully' });
+        }
+    });
+});
+
+app.get('/api/students?', (req, res) => {
+    const name = req.query.name;
+
+    if(!name) {
+        return res.status(400).send('Name parameter is required');
+    }
+
+    const query = "select * from students where name like ?";
+    const searchTerm = `%${name}%`;
+    db.query(query, searchTerm, (err, result) => {
+        if(err) {
+            console.error("Error retreiving students:", err);
+            return res.status(500).send('Error retreiving students');
+        }else {
+            res.status(200).json(result);
         }
     });
 });
