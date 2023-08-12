@@ -10,7 +10,7 @@ import { CrudService } from 'src/app/services/crud.service';
 
 export class StudentComponent implements OnInit {
 
-  studentForm : FormGroup;
+  studentForm! : FormGroup;
 
   constructor(private fb: FormBuilder, private cruds: CrudService) {
     this.studentForm = this.fb.group({

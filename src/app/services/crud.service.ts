@@ -28,8 +28,8 @@ export class CrudService {
   }
 
   //get student by ID API method GET
-  getAllStudentsById(id: number):Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}/all/${id}`);
+  getStudentsById(id: number):Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/${id}`);
   }
 
   //update student by ID API method PUT

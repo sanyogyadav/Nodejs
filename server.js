@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const mysql = require('mysql');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
 app.use(bodyparser.json());
+app.use(cors('*'));
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -22,17 +24,18 @@ db.connect( err => {
     }
 })
 
-app.post('/api/students', (req, res) => {
-    const {_id, name, email, age, city} = req.body;
-    const query = 'insert into students (_id, name, email, age, city) values(?, ?, ?, ?, ?)';
+app.post('/api/students', async (req, res) => {
+    const {id, name, email, age, city} = await req.body;
+    console.log(req.body);
+    const query = await 'insert into students (_id, name, email, age, city) values(?, ?, ?, ?, ?)';
 
-    db.query(query, [_id, name, email, age, city], (err, result) => {
+    db.query(query, [id, name, email, age, city], (err, result) => {
         if(err) {
             console.error('Error creating student:', err);
-            res.status(500).send('Error creating item');
+            res.status(500).send({message : 'Error creating item'});
         }else {
             // console.log(result); will show affected rows and other data in console.
-            res.status(201).send('Student created successfully');
+            res.status(201).send({message : 'Student created successfully'});
         }
     });
 });
@@ -42,7 +45,7 @@ app.get('/api/students/all', (req,res) => {
         if(err) {
             console.log(err);
         } else {
-            return res.send({ Students: result, message: 'Students list.'});
+            return res.send(result);
         }
     });
 });
@@ -68,7 +71,7 @@ app.put('/api/students/:id', (req, res) => {
             console.error('Error updating student:', err);
             res.status(500).send({ message: 'Error updating student' });
         } else {
-            res.status(200).send('student updated successfully');
+            res.status(200).send({message: 'student updated successfully'});
         }
     }); 
 });
@@ -110,7 +113,7 @@ app.get('/api/students?', (req, res) => {
     db.query(query, searchTerm, (err, result) => {
         if(err) {
             console.error("Error retreiving students:", err);
-            return res.status(500).send('Error retreiving students');
+            return res.status(500).send({message: 'Error retreiving students'});
         }else {
             res.status(200).json(result);
         }

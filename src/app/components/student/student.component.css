@@ -1,5 +1,6 @@
 .innerChild {
-    margin-top: 6rem;
+    margin-top: 2rem;
+    border-radius: 5px solid;
 }
 
 .header {
@@ -8,12 +9,4 @@
 
 .form-check {
     padding-bottom: 10px;
-}
-
-.dashboard {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-    border-bottom: 5px lightblue solid;
-    margin-top: 10px;
 }
