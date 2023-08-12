@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-student',
@@ -11,7 +12,7 @@ export class StudentComponent implements OnInit {
 
   studentForm : FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cruds: CrudService) {
     this.studentForm = this.fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
@@ -25,7 +26,19 @@ export class StudentComponent implements OnInit {
 
   onSubmit() {
     if(this.studentForm.valid) {
+      let id = this.studentForm.value.id;
+      let name = this.studentForm.value.name;
+      let email = this.studentForm.value.email;
+      let age = this.studentForm.value.age;
+      let city = this.studentForm.value.city;
+
       console.log(this.studentForm.value);
+
+      this.cruds.createStudents( id, name, email, age, city ).subscribe((result) => {
+        console.log(result);
+      })
+
+      // console.log(this.studentForm.value);
     }
   }
 }
