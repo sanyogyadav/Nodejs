@@ -1,5 +1,5 @@
 <div class="parent">
-    <div class="child">
+    <div class="child1">
         <table class="table mt-4">
             <thead class="thead-dark">
               <tr>
@@ -8,17 +8,48 @@
                 <th scope="col">Email</th>
                 <th scope="col">Age</th>
                 <th scope="col">City</th>
+                <th scope="col">Delete</th>
               </tr>
             </thead>
             <tbody *ngFor="let student of student_list">
               <tr>
-                <th scope="row" (click)="getStudentDetailById(student._id)">{{student._id}}</th>
+                <th scope="row" (click)="getStudentById(student._id)">{{student._id}}</th>
                 <td>{{student.name}}</td>
                 <td>{{student.email}}</td>
                 <td>{{student.age}}</td>
                 <td>{{student.city}}</td>
+                <td><button type="button" class="btn btn-link" (click)="deleteStudentById(student._id)">Delete</button></td>
               </tr>
             </tbody>
           </table>
     </div>
+</div>
+<div *ngIf="student_details">
+  <div>
+      <div>
+              <h2 class="header">Update student details</h2>
+              <!-- <input type="text" #name value="{{student_details.name}}"> -->
+              <div class="form-group">
+                  <label for="id">Student ID</label>
+                  <input type="number" class="form-control" #id id="id" aria-describedby="idHelp" value="{{student_details._id}}">
+              </div>
+              <div class="form-group">
+                  <label for="name">Student Name</label>
+                  <input type="text" class="form-control" id="name" #name value="{{student_details.name}}">
+                </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" #email aria-describedby="emailHelp" value="{{student_details.email}}">
+              </div>
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" #age value="{{student_details.age}}">
+              </div>
+              <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" id="city" #city value="{{student_details.city}}">
+                </div>
+              <button type="submit" class="btn btn-primary" (click)="updateStudentById(id.value, name.value, email.value, age.value, city.value)">Submit</button>
+      </div>
+  </div>
 </div>

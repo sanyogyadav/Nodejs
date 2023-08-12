@@ -37,8 +37,6 @@ export class StudentComponent implements OnInit {
       this.cruds.createStudents( id, name, email, age, city ).subscribe((result) => {
         console.log(result);
       })
-
-      // console.log(this.studentForm.value);
     }
   }
 }

@@ -57,7 +57,7 @@ app.get('/api/students/:id', (req, res) => {
         if(result==0) {
             return res.send({Message : 'Cannot find student with provided ID.'});
         }else {
-            return res.send({Student: result, message: 'Student with ID.'});
+            return res.send(result);
         }
     });
 });

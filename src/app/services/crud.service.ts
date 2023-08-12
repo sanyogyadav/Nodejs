@@ -33,7 +33,7 @@ export class CrudService {
   }
 
   //update student by ID API method PUT
-  updateStudentById(id: number, name: string, email: string, age: number, city: string):Observable<any> {
+  updateStudentById(id: string, name: string, email: string, age: string, city: string):Observable<any> {
     return this.http.put<any>(`${this.url}/${id}`, {
       name: name,
       email: email,
@@ -53,8 +53,10 @@ export class CrudService {
   }
 
   //search student by name API method GET
-  searchStudentByName(): Observable<any> {
-    return this.http.get<any>(`${this.url}/?`);
+  searchStudentByName(url : any): Observable<any> {
+    // return this.http.get(`${this.url}/?name=${name}`);
+    return this.http.get(url);
+
   }
 
 }

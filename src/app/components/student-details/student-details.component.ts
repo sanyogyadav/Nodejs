@@ -12,7 +12,6 @@ export class StudentDetailsComponent implements OnInit{
   constructor(private cruds: CrudService) {}
 
   ngOnInit(): void {
-    
   }
 
 }
