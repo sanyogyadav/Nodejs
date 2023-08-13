@@ -31,19 +31,13 @@ export class DashboardComponent implements OnInit{
     const url = `http://localhost:3000/api/students?name=%${keyword}%`;
     this.cruds.searchStudentByName(url).subscribe(results => {
       this.searchResults = results;
-      console.log(results);
+      console.log("this is search value",results);
     });
   }
 
   clearSearch() {
     this.keyword = '';
     this.searchResults = [];
-  }
-
-  searchStudent(name: string) {
-    this.cruds.searchStudentByName(name).subscribe((result:any) => {
-      console.log(result);
-    })
   }
   
 }
