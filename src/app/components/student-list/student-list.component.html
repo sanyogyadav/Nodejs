@@ -25,29 +25,29 @@
     </div>
 </div>
 <div *ngIf="student_details">
-  <div>
+  <div *ngFor="let studentd of student_details">
       <div>
               <h2 class="header">Update student details</h2>
-              <!-- <input type="text" #name value="{{student_details.name}}"> -->
+              <!-- <input type="text" #name value="{{studentd.name}}"> -->
               <div class="form-group">
                   <label for="id">Student ID</label>
-                  <input type="number" class="form-control" #id id="id" aria-describedby="idHelp" value="{{student_details._id}}">
+                  <input type="number" class="form-control" #id id="id" aria-describedby="idHelp" value="{{studentd._id}}">
               </div>
               <div class="form-group">
                   <label for="name">Student Name</label>
-                  <input type="text" class="form-control" id="name" #name value="{{student_details.name}}">
+                  <input type="text" class="form-control" id="name" #name value="{{studentd.name}}">
                 </div>
               <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" #email aria-describedby="emailHelp" value="{{student_details.email}}">
+                <input type="email" class="form-control" id="email" #email aria-describedby="emailHelp" value="{{studentd.email}}">
               </div>
               <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" #age value="{{student_details.age}}">
+                <input type="number" class="form-control" id="age" #age value="{{studentd.age}}">
               </div>
               <div class="form-group">
                   <label for="city">City</label>
-                  <input type="text" class="form-control" id="city" #city value="{{student_details.city}}">
+                  <input type="text" class="form-control" id="city" #city value="{{studentd.city}}">
                 </div>
               <button type="submit" class="btn btn-primary" (click)="updateStudentById(id.value, name.value, email.value, age.value, city.value)">Submit</button>
       </div>

@@ -32,6 +32,7 @@ export class StudentListComponent implements OnInit {
   updateStudentById(id: string, name: string, email: string, age: string, city: string) {
     this.cruds.updateStudentById( id, name, email, age, city ).subscribe((result) => {
       console.log(result);
+      this.student_details= [];
       this.ngOnInit();
     })
   }  
